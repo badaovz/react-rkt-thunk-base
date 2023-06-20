@@ -1,12 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { styled } from "styled-components";
-import { getImages } from "./gallerySlice";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { styled } from 'styled-components';
+import { getImages } from './gallerySlice';
 
 const Wrapper = styled.div`
+    max-width: 95vw;
+    margin-inline: auto;
     background-color: #fff;
 
-    h3{
+    h3 {
         font-size: 48px;
         text-align: center;
         color: #bf4f74;
@@ -24,6 +26,7 @@ const Wrapper = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 28px;
+        padding: 0;
         list-style-type: none;
 
         @media (min-width: 740px) and (max-width: 1023px) {
@@ -41,31 +44,23 @@ const Wrapper = styled.div`
         border-radius: 5px;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     }
-
-`
+`;
 
 function App() {
-    const images = useSelector(state => state.gallery.images);
-    const dispatch = useDispatch()
+    const images = useSelector((state) => state.gallery.images);
+    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getImages())
-    }, [])
+        dispatch(getImages());
+    }, []);
 
     return (
-        <Wrapper className='gallery'>
-            <h3 className='gallery__title'>
-                Gallery Title
-            </h3>
-            <p className='gallery__desc'>
-                this is gallery description
-            </p>
-            <ul className='gallery__images'>
-                {photos.map((photo) => (
-                    <li className='gallery__image' key={photo.id}>
-                        <img
-                            src={photo.download_url}
-                            alt='photo__item'
-                        />
+        <Wrapper className="gallery">
+            <h3 className="gallery__title">Gallery Title</h3>
+            <p className="gallery__desc">this is gallery description</p>
+            <ul className="gallery__images">
+                {images.map((image) => (
+                    <li className="gallery__image" key={image.id}>
+                        <img src={image.download_url} alt="image__item" />
                     </li>
                 ))}
             </ul>
